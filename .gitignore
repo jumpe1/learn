@@ -1,1 +1,8 @@
 /sso/.env
+/.idea/
+/vpc_peering/.terraform/
+/vpc_peering/.terraform.lock.hcl
+/vpc_peering/terraform.tfstate
+/vpc_peering/terraform.tfstate.backup
+/vpc_peering/terraform.tfvars
+/vpc_peering/.terraform.tfstate.lock.info
