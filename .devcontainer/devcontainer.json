@@ -1,0 +1,16 @@
+{
+  "name": "Vim and GitHub Copilot Setup",
+  "image": "mcr.microsoft.com/vscode/devcontainers/base:ubuntu",
+  "features": {
+    "ghcr.io/devcontainers/features/github-copilot:1": {}
+  },
+  "postCreateCommand": "sh .devcontainer/setup.sh",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "GitHub.copilot",
+        "GitHub.copilot-chat"
+      ]
+    }
+  }
+}
