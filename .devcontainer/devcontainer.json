@@ -11,6 +11,7 @@
         "vscodevim.vim",
         "github.copilot",
         "github.copilot-chat",
+        "golang.go"
       ]
     }
   }
