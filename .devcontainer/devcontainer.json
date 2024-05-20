@@ -1,12 +1,15 @@
 {
-  "name": "Vim and GitHub Copilot Setup",
-  "image": "mcr.microsoft.com/vscode/devcontainers/base:ubuntu",
-  "postCreateCommand": "sh .devcontainer/setup.sh",
+  "image": "mcr.microsoft.com/devcontainers/universal:2",
+  "features": {
+//    "ghcr.io/devcontainers/features/aws-cli:1": {},
+//    "ghcr.io/dhoeric/features/google-cloud-cli:1": {},
+//    "ghcr.io/devcontainers/features/terraform:1": {},
+  },
   "customizations": {
     "vscode": {
       "extensions": [
-        "GitHub.copilot",
-        "GitHub.copilot-chat"
+        "github.copilot",
+        "github.copilot-chat",
       ]
     }
   }
