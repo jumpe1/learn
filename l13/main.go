@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"l13/pkg"
 	"log"
 
@@ -14,6 +13,8 @@ func main() {
 		log.Fatalf("Failed to read config.ini: %v", err)
 	}
 
+	channelToken := cfg.Section("LINE").Key("channel_token").String()
+	userID := cfg.Section("LINE").Key("user_id").String()
 	host := cfg.Section("ZTE").Key("host").String()
 	password := cfg.Section("ZTE").Key("password").String()
 
@@ -22,16 +23,22 @@ func main() {
 	loggedIn, err := zte.Login()
 	if err != nil {
 		log.Fatalf("Login error: %v", err)
+		return
 	}
 	if !loggedIn {
-		fmt.Println("Login failed")
+		log.Fatal("Login failed")
 		return
 	}
 
-	err = zte.Reboot()
-	if err != nil {
+	if err = zte.Reboot(); err != nil {
 		log.Fatalf("Reboot error: %v", err)
+		return
 	}
 
-	fmt.Println("Reboot command sent successfully.")
+	message := "Reboot 5G Rooter successfully."
+	log.Println(message)
+	lineMessageAPI := pkg.NewLineMessageAPI(channelToken, userID)
+	if err = lineMessageAPI.Send(message); err != nil {
+		log.Fatalf("Failed to send message: %v", err)
+	}
 }
