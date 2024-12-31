@@ -3,6 +3,9 @@ package pkg
 import (
 	"crypto/sha256"
 	"encoding/hex"
+	"fmt"
+	"log"
+	"os"
 	"strings"
 	"time"
 )
@@ -18,4 +21,26 @@ func hexSha256(s string) string {
 
 func passwordAlgorithmsCookie(s string) string {
 	return hexSha256(s)
+}
+
+type Logger struct {
+	timestampString string
+}
+
+func NewLogger() *Logger {
+	return &Logger{
+		timestampString: time.Now().Format(time.RFC3339),
+	}
+}
+
+func (l *Logger) LogAndWriteStatus(filename, message string) {
+	fullMessage := fmt.Sprintf("%s - %s", l.timestampString, message)
+
+	log.Println(fullMessage)
+
+	if filename != "" {
+		if err := os.WriteFile(filename, []byte(fullMessage+"\n"), 0644); err != nil {
+			log.Printf("Failed to write to status file (%s): %v", filename, err)
+		}
+	}
 }
