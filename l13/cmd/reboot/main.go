@@ -12,6 +12,7 @@ func main() {
 	cfg, err := ini.Load("config.ini")
 	if err != nil {
 		log.Fatalf("Failed to read config.ini: %v", err)
+		return
 	}
 
 	host := cfg.Section("ZTE").Key("host").String()
