@@ -4,8 +4,6 @@ import (
 	"fmt"
 	"l13/pkg"
 	"log"
-	"os"
-	"time"
 
 	"github.com/go-ini/ini"
 )
@@ -39,11 +37,5 @@ func main() {
 	}
 
 	message := "Reboot 5G Router successfully."
-
-	if err = os.WriteFile(statusFilename, []byte(fmt.Sprintf("%s - %s\n", time.Now().Format(time.RFC3339), message)), 0644); err != nil {
-		logger.LogAndWriteStatus(statusFilename, fmt.Sprintf("Failed to write to file: %v", err))
-		return
-	}
-
-	logger.LogAndWriteStatus(statusFilename, fmt.Sprintf("Login error: %v", err))
+	logger.LogAndWriteStatus(statusFilename, message)
 }
